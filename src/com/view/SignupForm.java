@@ -465,15 +465,11 @@ public class SignupForm extends JFrame {
 			update = new JButton("UPDATE");
 			update.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					
-					JOptionPane.showMessageDialog(null, sid);
-					
 
 					
 					Student s = new Student();
 					
 					s.setId(sid);
-					JOptionPane.showMessageDialog(null, sid);
 					s.setFname(fnametxt.getText());
 					s.setLname(lnametxt.getText());
 					s.setAge(Integer.parseInt(agetxt.getText()));

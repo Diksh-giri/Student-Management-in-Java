@@ -2,6 +2,7 @@ package com.service;
 
 import java.util.List;
 
+import com.model.Credential;
 import com.model.Student;
 
 public interface StudentService  {
@@ -12,9 +13,14 @@ public interface StudentService  {
 	
 	boolean updateStudent(Student s);
 	
+	
 	Student getStudentId(int id);
 	
 	List<Student> getAllStudents();
 	
 	List<Student> searchStudent(String data);
+
+	boolean signup(Credential c);
+
+	boolean login(Credential c);
 }

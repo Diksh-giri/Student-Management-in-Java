@@ -14,6 +14,7 @@ import javax.swing.table.DefaultTableModel;
 
 import com.db.DB;
 import com.model.Student;
+import com.model.Credential;
 
 public class StudentServiceImpl implements StudentService {
 
@@ -206,5 +207,51 @@ List<Student> stu = new ArrayList<>();
 		return stu;
 		
 	}
+
+	@Override
+	public boolean signup(Credential c) {
+		
+		String sql = "Insert into SwingDb.cred (name,email,username,password) values(?,?,?,?)";
+		
+		try {
+			PreparedStatement pstm = DB.getConnection().prepareStatement(sql);
+			
+			pstm.setString(1, c.getName());
+			pstm.setString(2, c.getEmail());
+			pstm.setString(3, c.getUsername());
+			pstm.setString(4, c.getPassword());
+			
+			pstm.execute();
+			return true;
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return false;
+	}
+
+	public boolean login(Credential c) {
+String sql = "Select * from SwingDb.cred where username like '"+c.getUsername()+"' ";
+		
+		try {
+			
+			Statement st = DB.getConnection().createStatement();
+			ResultSet rs =st.executeQuery(sql);
+			
+			if(rs.next()) {
+				if(c.getPassword().equals(rs.getString("password"))) {
+					return true;
+				}
+				
+				
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return false;
+	}
+
 
 }
